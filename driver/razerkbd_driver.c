@@ -132,6 +132,7 @@ static bool is_blade_laptop(struct usb_device *usb_dev)
     case USB_DEVICE_ID_RAZER_BLADE_STEALTH_LATE_2019:
     case USB_DEVICE_ID_RAZER_BLADE_PRO_2019:
     case USB_DEVICE_ID_RAZER_BLADE_PRO_LATE_2019:
+    case USB_DEVICE_ID_RAZER_BLADE_2020_BASE:
         return true;
     }
     return false;
@@ -407,6 +408,10 @@ static ssize_t razer_attr_read_device_type(struct device *dev, struct device_att
 
     case USB_DEVICE_ID_RAZER_BLADE_2019_BASE:
         device_type = "Razer Blade 15 (2019) Base Model\n";
+        break;
+
+    case USB_DEVICE_ID_RAZER_BLADE_2020_BASE:
+        device_type = "Razer Blade 15 (2020) Base Model\n";
         break;
 
     case USB_DEVICE_ID_RAZER_BLADE_MID_2019_MERCURY:
@@ -1085,6 +1090,7 @@ static ssize_t razer_attr_write_mode_static(struct device *dev, struct device_at
     case USB_DEVICE_ID_RAZER_BLADE_2018_BASE:
     case USB_DEVICE_ID_RAZER_BLADE_2019_ADV:
     case USB_DEVICE_ID_RAZER_BLADE_2019_BASE:
+    case USB_DEVICE_ID_RAZER_BLADE_2020_BASE:
     case USB_DEVICE_ID_RAZER_BLADE_MID_2019_MERCURY:
     case USB_DEVICE_ID_RAZER_BLADE_STUDIO_EDITION_2019:
     case USB_DEVICE_ID_RAZER_BLADE_LATE_2016:
@@ -2271,6 +2277,7 @@ static int razer_kbd_probe(struct hid_device *hdev, const struct hid_device_id *
         case USB_DEVICE_ID_RAZER_BLADE_STEALTH_2019:
         case USB_DEVICE_ID_RAZER_BLADE_STEALTH_LATE_2019:
         case USB_DEVICE_ID_RAZER_BLADE_2019_BASE:
+        case USB_DEVICE_ID_RAZER_BLADE_2020_BASE:
             CREATE_DEVICE_FILE(&hdev->dev, &dev_attr_matrix_effect_none);            // No effect
             CREATE_DEVICE_FILE(&hdev->dev, &dev_attr_matrix_effect_static);          // Static effect
             CREATE_DEVICE_FILE(&hdev->dev, &dev_attr_matrix_effect_spectrum);        // Spectrum effect
@@ -2571,6 +2578,7 @@ static void razer_kbd_disconnect(struct hid_device *hdev)
         case USB_DEVICE_ID_RAZER_BLADE_STEALTH_2019:
         case USB_DEVICE_ID_RAZER_BLADE_STEALTH_LATE_2019:
         case USB_DEVICE_ID_RAZER_BLADE_2019_BASE:
+        case USB_DEVICE_ID_RAZER_BLADE_2020_BASE:
             device_remove_file(&hdev->dev, &dev_attr_matrix_effect_none);            // No effect
             device_remove_file(&hdev->dev, &dev_attr_matrix_effect_static);          // Static effect
             device_remove_file(&hdev->dev, &dev_attr_matrix_effect_spectrum);        // Spectrum effect
@@ -2759,6 +2767,7 @@ static const struct hid_device_id razer_devices[] = {
     { HID_USB_DEVICE(USB_VENDOR_ID_RAZER,USB_DEVICE_ID_RAZER_BLADE_2018_BASE) },
     { HID_USB_DEVICE(USB_VENDOR_ID_RAZER,USB_DEVICE_ID_RAZER_BLADE_2019_ADV) },
     { HID_USB_DEVICE(USB_VENDOR_ID_RAZER,USB_DEVICE_ID_RAZER_BLADE_2019_BASE) },
+    { HID_USB_DEVICE(USB_VENDOR_ID_RAZER,USB_DEVICE_ID_RAZER_BLADE_2020_BASE) },
     { HID_USB_DEVICE(USB_VENDOR_ID_RAZER,USB_DEVICE_ID_RAZER_BLADE_MID_2019_MERCURY) },
     { HID_USB_DEVICE(USB_VENDOR_ID_RAZER,USB_DEVICE_ID_RAZER_BLADE_PRO_LATE_2019) },
     { HID_USB_DEVICE(USB_VENDOR_ID_RAZER,USB_DEVICE_ID_RAZER_BLADE_STUDIO_EDITION_2019) },
